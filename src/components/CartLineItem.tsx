@@ -2,6 +2,7 @@ import { ChangeEvent, ReactElement, memo } from "react"
 import { CartItemType } from "../context/CartProvider"
 import { ReducerAction } from "../context/CartProvider"
 import { ReducerActionType } from "../context/CartProvider"
+import Cart from "./Cart"
 
 type PropsType = {
     item: CartItemType,
@@ -71,5 +72,14 @@ const CartLineItem = ({ item, dispatch, REDUCER_ACTIONS }: PropsType) => {
     return content
 }
 
+function areItemsEqual({ item: prevItem }: PropsType, {item:nextItem}:PropsType) {
+    return Object.keys(prevItem).every(key => {
+        return prevItem[key as keyof CartItemType] === nextItem
+        [key as keyof CartItemType]
+    })
+}
 
-export default CartLineItem
+const MemoizedCartLine = memo<typeof CartLineItem>
+(CartLineItem, areItemsEqual)
+
+export default MemoizedCartLine

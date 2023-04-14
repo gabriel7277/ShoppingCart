@@ -14,7 +14,7 @@ import CartLineItem from './CartLineItem'
       }
 
       const pageContent = confirm
-        ? <h2>Thank you for order.</h2>
+        ? <h2 className='thanks'>Thank you for order.</h2>
         : <>
           <h2 className='offscreen'>Cart</h2>
           <ul className='cart'>
